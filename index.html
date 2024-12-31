@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year Countdown</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(120deg, #021bfc, #fa0410);
+            font-family: 'Arial', sans-serif;
+            color: rgb(12, 12, 12);
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .year {
+            font-size: 5rem;
+            margin: 0;
+        }
+
+        .countdown {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .progress {
+            height: 100%;
+            background: #00e1ff;
+            width: 0;
+            transition: width 1s linear;
+        }
+
+        .message {
+            font-size: 2rem;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="year">2024</div>
+        <div class="countdown" id="countdown">Loading...</div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="message" id="message">Happy New Year!</div>
+    </div>
+
+    <script>
+        const countdownElement = document.getElementById('countdown');
+        const progressElement = document.getElementById('progress');
+        const messageElement = document.getElementById('message');
+        const yearElement = document.querySelector('.year');
+
+        let countdownTime = 10; // Countdown in seconds
+        const totalCountdownTime = countdownTime;
+
+        function updateCountdown() {
+            if (countdownTime > 0) {
+                countdownElement.textContent = `Countdown: ${countdownTime} seconds`;
+                progressElement.style.width = `${((totalCountdownTime - countdownTime) / totalCountdownTime) * 100}%`;
+                countdownTime--;
+            } else {
+                clearInterval(interval); 
+                yearElement.textContent = '2025';
+                countdownElement.textContent = '';
+                progressElement.style.width = '100%';
+                messageElement.style.opacity = 1;
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
